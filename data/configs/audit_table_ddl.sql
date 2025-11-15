@@ -1,4 +1,4 @@
-CREATE TABLE avd-databricks-demo.temp_dataset.audit_log (
+CREATE TABLE project-5cc55465-ca85-416a-819.temp_dataset.audit_log (
     data_source STRING,
     tablename STRING,
     load_type STRING,

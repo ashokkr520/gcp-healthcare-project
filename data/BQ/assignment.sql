@@ -1,6 +1,6 @@
 -- 4. Financial Metrics (Gold) : Aggregates financial KPIs, such as total revenue, claim success rate, and outstanding balances.
 
-CREATE TABLE IF NOT EXISTS `avd-databricks-demo.gold_dataset.financial_metrics` AS
+CREATE TABLE IF NOT EXISTS `project-5cc55465-ca85-416a-819.gold_dataset.financial_metrics` AS
 SELECT 
     COUNT(DISTINCT t.Transaction_Key) AS TotalTransactions,
     SUM(t.Amount) AS TotalBilledAmount,
