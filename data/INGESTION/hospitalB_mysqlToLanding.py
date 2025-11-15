@@ -12,24 +12,24 @@ bq_client = bigquery.Client()
 spark = SparkSession.builder.appName("HospitalAMySQLToLanding").getOrCreate()
 
 # Google Cloud Storage (GCS) Configuration
-GCS_BUCKET = "healthcare-bucket-7009"
-HOSPITAL_NAME = "hospital-b"
+GCS_BUCKET = "healthcare-bucket-7009"    #Changed bucket Name
+HOSPITAL_NAME = "hospital-b"     #Changed Hospital Name.
 LANDING_PATH = f"gs://{GCS_BUCKET}/landing/{HOSPITAL_NAME}/"
 ARCHIVE_PATH = f"gs://{GCS_BUCKET}/landing/{HOSPITAL_NAME}/archive/"
 CONFIG_FILE_PATH = f"gs://{GCS_BUCKET}/configs/load_config.csv"
 
 # BigQuery Configuration
-BQ_PROJECT = "project-5cc55465-ca85-416a-819"
+BQ_PROJECT = "project-5cc55465-ca85-416a-819"   #Changed Project Name.
 BQ_AUDIT_TABLE = f"{BQ_PROJECT}.temp_dataset.audit_log"
 BQ_LOG_TABLE = f"{BQ_PROJECT}.temp_dataset.pipeline_logs"
 BQ_TEMP_PATH = f"{GCS_BUCKET}/temp/"  
 
 # MySQL Configuration
 MYSQL_CONFIG = {
-    "url": "jdbc:mysql://104.154.243.38:3306/hospital_b_db?useSSL=true&allowPublicKeyRetrieval=true",
+    "url": "jdbc:mysql://104.154.243.38:3306/hospital_b_db?useSSL=true&allowPublicKeyRetrieval=true", #Changed the IP address.
     "driver": "com.mysql.cj.jdbc.Driver",
     "user": "myuser",
-    "password": "Knowledge@1357"
+    "password": "Knowledge@1357"  #Changed the user password.
 }
 
 ##------------------------------------------------------------------------------------------------------------------##
@@ -150,7 +150,7 @@ def extract_and_save_to_landing(table, load_type, watermark_col):
         # Insert Audit Entry
         audit_df = spark.createDataFrame([
             ("hospital_b_db", table, load_type, df.count(), datetime.datetime.now(), "SUCCESS")], 
-            ["data_source", "tablename", "load_type", "record_count", "load_timestamp", "status"])
+            ["data_source", "tablename", "load_type", "record_count", "load_timestamp", "status","event_type"])
 
         (audit_df.write.format("bigquery")
             .option("table", BQ_AUDIT_TABLE)
